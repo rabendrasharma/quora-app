@@ -1,0 +1,11 @@
+<h1>Select Topics</h1>
+<%= form_tag topics_path do %>
+  <%Topic.all.each do |topic|%>
+    <div class="col-md-3">
+      <input type="checkbox" name="selected_topic[<%= topic.id %>]" value="1"> <span class="label-text"><%= topic.subject %></span>
+    </div>
+  <% end %>
+  <div class="col-md-12">
+    <%= submit_tag "Submit" %>
+  </div>
+<% end %>

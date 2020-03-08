@@ -1,0 +1,59 @@
+<div style="float: right">
+  <%= link_to "Ask Question", new_question_path, class: "btn btn-success" %>
+</div>
+<div class="col-lg-2">
+  <div class=" aff-right">
+     <div class="ui-block">
+        <h6 class="my-4">Feeds</h6>
+        <hr>
+        <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+           <a class="nav-link active" data-toggle="pill" href="#"> Top Stories</a>
+           <a class="nav-link" data-toggle="pill" href="#" >New Questions</a>
+           <a class="nav-link" data-toggle="pill" href="#">Bookmarked Answers</a>
+           <a class="nav-link" data-toggle="pill" href="#">Links</a>
+           <a class="nav-link" data-toggle="pill" href="#">Payment Gateways</a>
+           <a class="nav-link" data-toggle="pill" href="#" >Education</a>
+           <a class="nav-link" data-toggle="pill" href="#">E-commerce</a>
+           <a class="nav-link" data-toggle="pill" href="#">Android Applications</a>
+        </div>
+     </div>
+  </div>
+</div>
+<!-- /.col-lg-3 -->
+<div class="col-lg-7">
+  <div class="ui-block">
+     <article class="hentry post">
+        <% @questions&@questions.each do |question| %>
+          <div class="m-link">
+             <a href="#"  target="_blank">
+                <h4><%= question.question %></h4>
+             </a>
+          </div>
+          <div class="post-additional-info inline-items" id="question-<%= question.id %>">
+            <p>
+              <div style= "float: right;">
+                <%= link_to "Answer", new_answer_path(question_id: question.id), remote: true, class: "btn btn-sm btn-light" %>
+              </div>
+            </p>
+          </div>
+          <% question.answers&question.answers.each do |answer|%>
+            <div class="post__author author vcard inline-items">
+               <div class="author-date">
+                  <a class="h6 post__author-name fn" href="#"><%= answer.user.email %></a>
+               </div>
+            </div>
+            <p><%= answer.answer %>
+            </p>
+            <%= answer.upvotes.count %>
+            <%= link_to "Upvote", answer.downvotes.blank? ? upvote_path(answer_id: answer.id) : "#", class: "btn btn-sm btn-light" %>
+            <%= answer.downvotes.count %>
+            <%= link_to "Downvote", answer.upvotes.blank? ? downvote_path(answer_id: answer.id) : "#", class: "btn btn-sm btn-light" %>
+          <% end %>
+        <% end %>
+     </article>
+  </div>
+</div>
+<!-- /.col-lg-6 -->
+<!--col-lg-3-->
+
+<!-- /.col-lg-3 -->

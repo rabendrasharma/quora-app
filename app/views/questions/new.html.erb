@@ -1,0 +1,7 @@
+<h1>Questions#new</h1>
+<%= form_tag questions_path do %>
+  <%= label_tag :topic_id, "Topic"%>
+  <%= select_tag :topic_id, options_for_select(current_user.subscribed_topics.map{|t| [t.subject, t.id]}) %>
+  <%= text_area_tag :question %>
+  <%= submit_tag %>
+<% end %>
